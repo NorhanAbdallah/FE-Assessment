@@ -1,10 +1,8 @@
-import React, {ReactElement} from 'react';
-import {Box, Button, Typography, Link} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import React, { ReactElement } from 'react';
+import { Box, Typography } from '@material-ui/core';
 import NotFound from './NotFound.svg';
 
 function ErrorPage404(): ReactElement {
-  const {t} = useTranslation();
 
   return (
     <div>
@@ -13,22 +11,10 @@ function ErrorPage404(): ReactElement {
           <Box height="40vh">
             <img src={NotFound} width="100%" height="100%" />
           </Box>
-          <Box mt={4} style={{textAlign: 'center'}}>
-            <Typography variant="h4" style={{fontFamily: 'Poppins', fontWeight: 500}}>
-              {`${t('general.404.title')}`}
+          <Box mt={4} style={{ textAlign: 'center' }}>
+            <Typography variant="h4" style={{ fontFamily: 'Poppins', fontWeight: 500 }}>
+              Not Found
             </Typography>
-          </Box>
-          <Box display="flex" justifyContent="center" mt={4}>
-            <Link href="/">
-              <Button
-                variant="contained"
-                color="primary"
-                disableElevation
-                style={{paddingBottom: 3, paddingTop: 3, backgroundColor: '#0B6CB9'}}
-              >
-                {`${t('general.404.homeButton')}`}
-              </Button>
-            </Link>
           </Box>
         </Box>
       </Box>
