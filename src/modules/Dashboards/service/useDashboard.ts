@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { DashboardData, Talent } from '../types';
 import { DropResult } from 'react-beautiful-dnd';
-import { mockedData } from './data';
+import { mockedData } from './mockedData';
 
 const statuses = {
   APPLIED: 'APPLIED',
