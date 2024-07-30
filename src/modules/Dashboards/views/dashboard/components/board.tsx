@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import Drop from './dragAndDrop/drop';
-import Drag from './dragAndDrop/drag';
-import ColumnView from './column';
-import { useStyles } from './styles';
-import DashboardContext from './context/context';
+import Drop from '../dragAndDrop/drop';
+import Drag from '../dragAndDrop/drag';
+import ColumnView from '../components/column';
+import { useStyles } from '../styles';
+import DashboardContext from '../context/context';
 
 export default function Board() {
   const classes = useStyles();
-  const { data, onDragEnd } = useContext(DashboardContext);
+  const { data, handleDragEnd } = useContext(DashboardContext);
 
   return (
 
-    <DragDropContext onDragEnd={data => onDragEnd(data)}>
+    <DragDropContext onDragEnd={data => handleDragEnd(data)}>
       <Drop
         className={classes.container}
         droppableId="all-columns"

@@ -1,42 +1,44 @@
 import { useCallback, useState } from 'react';
 import { DashboardData, Talent } from '../types';
 import { DropResult } from 'react-beautiful-dnd';
-import { dataArr } from './data';
+import { mockedData } from './data';
 
-const APPLIED = 'APPLIED';
-const SHORTLISTED = 'SHORTLISTED';
-const INTERVIEW = 'INTERVIEW';
+const statuses = {
+  APPLIED: 'APPLIED',
+  SHORTLISTED: 'SHORTLISTED',
+  INTERVIEW: 'INTERVIEW'
+};
 
 function useDashboard() {
-  const [tasks, setTasks] = useState<Talent[]>(dataArr as any);
+  const [tasks, setTasks] = useState<Talent[]>(mockedData as any);
 
-  const setBoardData = useCallback((_tasks: Talent[]) => {
+  const setBoardData = useCallback((talents: Talent[]) => {
     return {
-      tasks: _tasks.reduce((obj, item) => Object.assign(obj, { [item.id]: { ...item } }), {}),
+      tasks: talents.reduce((obj, item) => Object.assign(obj, { [item.id]: { ...item } }), {}),
       columns: {
         'column1': {
           id: 'column1',
-          title: APPLIED,
-          taskIds: _tasks.filter(item => item.status === 'APPLIED').map(item => item.id),
+          title: statuses.APPLIED,
+          taskIds: talents.filter(item => item.status === 'APPLIED').map(item => item.id),
         },
         'column2': {
           id: 'column2',
-          title: SHORTLISTED,
-          taskIds: _tasks.filter(item => item.status === 'SHORTLISTED').map(item => item.id),
+          title: statuses.SHORTLISTED,
+          taskIds: talents.filter(item => item.status === 'SHORTLISTED').map(item => item.id),
         },
         'column3': {
           id: 'column3',
-          title: INTERVIEW,
-          taskIds: _tasks.filter(item => item.status === 'INTERVIEW').map(item => item.id),
+          title: statuses.INTERVIEW,
+          taskIds: talents.filter(item => item.status === 'INTERVIEW').map(item => item.id),
         },
       },
       columnOrder: ['column1', 'column2', 'column3'],
     };
   }, []);
 
-  const [data, setData] = useState<DashboardData | undefined>(setBoardData(dataArr as any));
+  const [data, setData] = useState<DashboardData | undefined>(setBoardData(mockedData as any));
 
-  const onDragEnd = useCallback(
+  const handleDragEnd = useCallback(
     (res: DropResult) => {
       const { destination, draggableId } = res;
       if (destination) {
@@ -68,7 +70,7 @@ function useDashboard() {
   return {
     data,
     setData,
-    onDragEnd,
+    handleDragEnd,
   };
 }
 

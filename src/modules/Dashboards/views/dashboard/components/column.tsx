@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
 import { DraggableProvided } from 'react-beautiful-dnd';
-import { Talent, Column } from '../../types';
-import Drop from './dragAndDrop/drop';
+import { Talent, Column } from '../../../types';
+import Drop from '../dragAndDrop/drop';
 import clsx from 'clsx';
-import WorkOrderCard from './dashboardCard';
-import { useStyles } from './styles';
+import DashboardCard from './dashboard-card/';
+import { useStyles } from '../styles';
 
 interface ColumnProps {
   className?: string;
@@ -21,7 +21,7 @@ const ColumnView: FC<ColumnProps> = ({ column, talents, provided, isDragDisabled
     <div className={classes.column}>
       <Typography
         variant={'subtitle2'}
-        className={clsx(classes.title, column.id)}
+        className={clsx(classes.columnTitle, column.id)}
         {...provided?.dragHandleProps}
       >
         <div className={clsx('dot', column.id)} />
@@ -37,7 +37,7 @@ const ColumnView: FC<ColumnProps> = ({ column, talents, provided, isDragDisabled
         className="task-drop"
       >
         {talents.map((talent, index) => (
-          <WorkOrderCard key={talent.id} index={index} talent={talent} />
+          <DashboardCard key={talent.id} index={index} talent={talent} />
         ))}
       </Drop>
     </div>

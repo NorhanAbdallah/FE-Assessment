@@ -4,7 +4,7 @@ import WithLayout from 'shared/components/WithLayout';
 import Layout from 'shared/components/layout';
 
 const Dashboard = lazy(() => import('../views/index'));
-const ErrorPage404 = lazy(() => import('shared/components/ErrorPages/404'));
+const ErrorPage404 = lazy(() => import('shared/components/errorPage/404'));
 
 const wrapper =
   (

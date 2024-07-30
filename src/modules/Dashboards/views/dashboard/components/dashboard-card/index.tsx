@@ -1,29 +1,30 @@
 import React from 'react';
-import Drag from './dragAndDrop/drag';
+import Drag from '../../dragAndDrop/drag';
 import { Box, Typography, Chip, Avatar, Button } from '@material-ui/core';
 import {
   SignalCellularAlt,
   Star,
 } from '@material-ui/icons';
-import { Talent } from '../../types';
+import { Talent } from '../../../../types';
+import { useStyles } from './styles';
 
 interface Props {
   talent: Talent;
   index: number;
 }
 
-export default function WorkOrderCard({ talent, index }: Props) {
-
+export default function DashboardCard({ talent, index }: Props) {
+  const classes = useStyles()
   return (
     <Drag draggableId={talent.id} index={index} key={talent.id}>
       <div
         className="card"
       >
-        <Box mb={2} display={'flex'} alignItems={'flex-start'} justifyContent={'space-between'}>
+        <Box mb={2} className={classes.cardContainer}>
           <Box display={'flex'} alignItems={'center'}>
             <Avatar
               src={talent.imgUrl}
-              style={{ marginRight: '8px', borderRadius: '30%' }}
+              className={classes.avatar}
             />
             <Box>
               <Box display={'flex'}>
@@ -38,7 +39,7 @@ export default function WorkOrderCard({ talent, index }: Props) {
                   }}
                   fontSize="small"
                 />
-                <Typography variant={'body2'} style={{ marginLeft: '8px' }}>
+                <Typography variant={'body2'} className={classes.name}>
                   {talent.name}
                 </Typography>
               </Box>
@@ -58,22 +59,17 @@ export default function WorkOrderCard({ talent, index }: Props) {
             <Chip
               label={
                 <Box display={'flex'} alignItems={'flex-start'}>
-                  <Typography variant="caption" style={{ color: 'black', fontWeight: '500' }}>
+                  <Typography variant="caption" className={classes.stars}>
                     {`${talent.stars}.0`}
                   </Typography>
                   <Star style={{ marginLeft: '4px', fontSize: '16px', color: '#f7cd47' }} />
                 </Box>
               }
               variant="default"
-              style={{
-                color: '#6383ed',
-                fontWeight: 'bold',
-                minWidth: '28px',
-                background: '#f2f4f7',
-              }}
+              className={classes.chip}
             />
             <Box>
-              <Typography variant={'body2'} style={{ marginLeft: '8px', color: '#9aa7bf' }}>
+              <Typography variant={'body2'} className={classes.phoneNumber}>
                 {talent.phoneNumber}
               </Typography>
             </Box>
